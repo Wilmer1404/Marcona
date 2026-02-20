@@ -1,23 +1,22 @@
 const express = require('express');
 const cors = require('cors');
 
-// 1. Importamos las rutas de tu módulo de usuarios
+// Importaciones de rutas
 const usuarioRoutes = require('./modules/usuarios/usuario.routes');
 
 const app = express();
 
+// 1. PRIMERO: Los middlewares (Los traductores)
 app.use(cors()); 
-app.use(express.json()); 
+app.use(express.json()); // <- ¡Esta es la línea mágica que lee el req.body!
 app.use(express.urlencoded({ extended: true })); 
 
+// 2. SEGUNDO: Las rutas base
 app.get('/', (req, res) => {
-    res.json({ 
-        mensaje: 'API del Sistema de Gestión Documental - Marcona funcionando',
-        estado: 'Online'
-    });
+    res.json({ mensaje: 'API del SGD - Marcona funcionando' });
 });
 
-// 2. Activamos la ruta. Todo lo que vaya a /api/usuarios lo manejará usuario.routes.js
+// 3. TERCERO: Las rutas de tus módulos
 app.use('/api/usuarios', usuarioRoutes);
 
 module.exports = app;
