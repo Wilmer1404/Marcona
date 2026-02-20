@@ -1,19 +1,23 @@
 const express = require('express');
 const cors = require('cors');
 
+// 1. Importamos las rutas de tu módulo de usuarios
+const usuarioRoutes = require('./modules/usuarios/usuario.routes');
+
 const app = express();
 
-// Middlewares Globales
-app.use(cors()); // Permite que React se comunique con este backend
-app.use(express.json()); // Permite a Node entender los JSON que envíe el frontend
-app.use(express.urlencoded({ extended: true })); // Permite entender datos de formularios tradicionales
+app.use(cors()); 
+app.use(express.json()); 
+app.use(express.urlencoded({ extended: true })); 
 
-// Ruta base de prueba para saber que la API vive
 app.get('/', (req, res) => {
     res.json({ 
         mensaje: 'API del Sistema de Gestión Documental - Marcona funcionando',
         estado: 'Online'
     });
 });
+
+// 2. Activamos la ruta. Todo lo que vaya a /api/usuarios lo manejará usuario.routes.js
+app.use('/api/usuarios', usuarioRoutes);
 
 module.exports = app;
