@@ -6,7 +6,7 @@ const storage = multer.diskStorage({
     // Destino: La carpeta uploads/expedientes_internos que creaste en la raíz
     destination: function (req, file, cb) {
         // cb(error, ruta_destino)
-        cb(null, path.join(__dirname, '../../../uploads/expedientes_internos'));
+        cb(null, path.join(__dirname, '../../uploads/expedientes_internos'));
     },
     
     // Nombre del archivo: Le agregamos la fecha exacta (timestamp) para que sea único
