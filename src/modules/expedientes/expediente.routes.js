@@ -11,4 +11,6 @@ router.post('/nuevo',
     expedienteController.crearNuevoExpediente
 );
 
+router.get('/bandeja', verificarToken, expedienteController.listarBandejaDepartamento);
+
 module.exports = router;
