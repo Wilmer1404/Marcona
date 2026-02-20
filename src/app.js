@@ -6,6 +6,7 @@ const usuarioRoutes = require('./modules/usuarios/usuario.routes');
 const documentoRoutes = require('./modules/documentos/documento.routes');
 const expedienteRoutes = require('./modules/expedientes/expediente.routes');
 const authRoutes = require('./modules/auth/auth.routes');
+const path = require('path');
 
 const app = express();
 
@@ -24,5 +25,6 @@ app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/documentos', documentoRoutes);
 app.use('/api/expedientes', expedienteRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 module.exports = app;
