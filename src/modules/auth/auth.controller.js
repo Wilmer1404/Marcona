@@ -9,6 +9,7 @@ const login = async (req, res) => {
         // 1. Buscamos al usuario por su correo
         const { rows } = await pool.query('SELECT * FROM usuarios WHERE correo = $1 AND activo = true', [correo]);
         const usuario = rows[0];
+        console.log("Usuario encontrado en la BD:", usuario);
 
         if (!usuario) {
             return res.status(401).json({ exito: false, mensaje: 'Correo o contraseña incorrectos' });
@@ -16,6 +17,7 @@ const login = async (req, res) => {
 
         // 2. Comparamos la contraseña escrita con la encriptada en PostgreSQL
         const passwordValida = await bcrypt.compare(password, usuario.password_hash);
+        console.log("¿La contraseña coincidió?:", passwordValida);
         
         if (!passwordValida) {
             return res.status(401).json({ exito: false, mensaje: 'Correo o contraseña incorrectos' });
