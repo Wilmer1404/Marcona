@@ -90,7 +90,27 @@ const obtenerPorDepartamento = async (departamentoId) => {
     return rows;
 };
 
+const obtenerHistorial = async (expedienteId) => {
+    const query = `
+        SELECT 
+            h.id,
+            h.accion,
+            h.descripcion,
+            h.fecha_movimiento,
+            u.nombres || ' ' || u.apellidos AS usuario,
+            d.nombre AS departamento
+        FROM historial_movimientos h
+        JOIN usuarios u ON h.usuario_id = u.id
+        JOIN departamentos d ON h.departamento_id = d.id
+        WHERE h.expediente_id = $1
+        ORDER BY h.fecha_movimiento ASC;
+    `;
+    const { rows } = await pool.query(query, [expedienteId]);
+    return rows;
+};
+
 module.exports = { 
     crearExpedienteCompleto,
-    obtenerPorDepartamento 
+    obtenerPorDepartamento,
+    obtenerHistorial
 };
