@@ -52,7 +52,23 @@ const listarBandejaDepartamento = async (req, res) => {
     }
 };
 
+const verHistorialExpediente = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtendremos el ID de la URL
+        const historial = await expedienteService.obtenerHistorial(id);
+
+        res.status(200).json({
+            exito: true,
+            data: historial
+        });
+    } catch (error) {
+        console.error('Error al obtener historial:', error);
+        res.status(500).json({ exito: false, mensaje: 'Error al obtener el historial' });
+    }
+};
+
 module.exports = { 
     crearNuevoExpediente,
-    listarBandejaDepartamento 
+    listarBandejaDepartamento,
+    verHistorialExpediente
 };
