@@ -3,6 +3,7 @@ const cors = require('cors');
 
 // Importaciones de rutas
 const usuarioRoutes = require('./modules/usuarios/usuario.routes');
+const documentoRoutes = require('./modules/documentos/documento.routes');
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.get('/', (req, res) => {
 
 // 3. TERCERO: Las rutas de tus módulos
 app.use('/api/usuarios', usuarioRoutes);
+app.use('/api/documentos', documentoRoutes);
 
 module.exports = app;
