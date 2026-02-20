@@ -12,5 +12,6 @@ router.post('/nuevo',
 );
 
 router.get('/bandeja', verificarToken, expedienteController.listarBandejaDepartamento);
+router.get('/:id/historial', verificarToken, expedienteController.verHistorialExpediente);
 
 module.exports = router;
