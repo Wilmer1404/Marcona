@@ -76,7 +76,7 @@ const obtenerPorDepartamento = async (departamentoId) => {
             e.codigo_expediente, 
             e.asunto, 
             e.tipo_origen,
-            e.creado_en,
+            e.fecha_creacion,
             u.nombres || ' ' || u.apellidos AS creador,
             d.nombre AS departamento_origen
         FROM expedientes e
@@ -84,7 +84,7 @@ const obtenerPorDepartamento = async (departamentoId) => {
         JOIN departamentos d ON e.departamento_origen_id = d.id
         JOIN expediente_departamento ed ON e.id = ed.expediente_id
         WHERE ed.departamento_id = $1
-        ORDER BY e.creado_en DESC;
+        ORDER BY e.fecha_creacion DESC;
     `;
     const { rows } = await pool.query(query, [departamentoId]);
     return rows;
