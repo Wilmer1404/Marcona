@@ -5,6 +5,7 @@ const cors = require('cors');
 const usuarioRoutes = require('./modules/usuarios/usuario.routes');
 const documentoRoutes = require('./modules/documentos/documento.routes');
 const expedienteRoutes = require('./modules/expedientes/expediente.routes');
+const authRoutes = require('./modules/auth/auth.routes');
 
 const app = express();
 
@@ -22,5 +23,6 @@ app.get('/', (req, res) => {
 app.use('/api/usuarios', usuarioRoutes);
 app.use('/api/documentos', documentoRoutes);
 app.use('/api/expedientes', expedienteRoutes);
+app.use('/api/auth', authRoutes);
 
 module.exports = app;
