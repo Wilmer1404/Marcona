@@ -69,4 +69,28 @@ const crearExpedienteCompleto = async (datosTexto, datosArchivo) => {
     }
 };
 
-module.exports = { crearExpedienteCompleto };
+const obtenerPorDepartamento = async (departamentoId) => {
+    const query = `
+        SELECT 
+            e.id, 
+            e.codigo_expediente, 
+            e.asunto, 
+            e.tipo_origen,
+            e.creado_en,
+            u.nombres || ' ' || u.apellidos AS creador,
+            d.nombre AS departamento_origen
+        FROM expedientes e
+        JOIN usuarios u ON e.usuario_creador_id = u.id
+        JOIN departamentos d ON e.departamento_origen_id = d.id
+        JOIN expediente_departamento ed ON e.id = ed.expediente_id
+        WHERE ed.departamento_id = $1
+        ORDER BY e.creado_en DESC;
+    `;
+    const { rows } = await pool.query(query, [departamentoId]);
+    return rows;
+};
+
+module.exports = { 
+    crearExpedienteCompleto,
+    obtenerPorDepartamento 
+};
