@@ -1,0 +1,51 @@
+# =========================================
+# DEPENDENCIAS (No se suben, pesan mucho)
+# =========================================
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# =========================================
+# VARIABLES DE ENTORNO Y SECRETOS (Crítico)
+# =========================================
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.pem
+
+# =========================================
+# ARCHIVOS LOCALES SUBIDOS POR USUARIOS
+# =========================================
+# No queremos que los PDFs o Excels de prueba 
+# de la municipalidad terminen en internet.
+uploads/
+/src/uploads/
+public/uploads/
+
+# =========================================
+# ARCHIVOS DEL SISTEMA OPERATIVO
+# =========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# =========================================
+# ARCHIVOS DE EDITORES DE CÓDIGO (Ej: VS Code)
+# =========================================
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================================
+# LOGS Y COBERTURA DE PRUEBAS
+# =========================================
+logs
+*.log
+coverage/
+.nyc_output/
