@@ -28,4 +28,31 @@ const crearNuevoExpediente = async (req, res) => {
     }
 };
 
-module.exports = { crearNuevoExpediente };
+const listarBandejaDepartamento = async (req, res) => {
+    try {
+        // Extraemos el departamento_id del token (inyectado por el middleware de auth)
+        const { departamento_id } = req.usuario;
+
+        if (!departamento_id) {
+            return res.status(400).json({ 
+                exito: false, 
+                mensaje: 'El usuario no tiene un departamento asignado' 
+            });
+        }
+
+        const expedientes = await expedienteService.obtenerPorDepartamento(departamento_id);
+
+        res.status(200).json({
+            exito: true,
+            data: expedientes
+        });
+    } catch (error) {
+        console.error('Error al listar bandeja:', error);
+        res.status(500).json({ exito: false, mensaje: 'Error al obtener los expedientes' });
+    }
+};
+
+module.exports = { 
+    crearNuevoExpediente,
+    listarBandejaDepartamento 
+};
