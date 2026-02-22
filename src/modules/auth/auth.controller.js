@@ -38,8 +38,12 @@ const login = async (req, res) => {
             mensaje: 'Inicio de sesión exitoso',
             token: token,
             usuario: {
+                id: usuario.id,
+                dni: usuario.dni,
                 nombres: usuario.nombres,
                 apellidos: usuario.apellidos,
+                correo: usuario.correo,
+                departamento_id: usuario.departamento_id,
                 rol: usuario.rol
             }
         });

@@ -2,7 +2,7 @@ require('dotenv').config();
 const app = require('./app');
 const { pool } = require('./config/database');
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Probamos la conexión a la base de datos antes de levantar el servidor
 pool.query('SELECT NOW()', (err, res) => {
